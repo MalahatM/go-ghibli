@@ -1,4 +1,5 @@
 import type { Film } from "../types/film";
+import "./FilmList.css";
 
 type Props = {
   films: Film[];
@@ -6,21 +7,10 @@ type Props = {
 
 function FilmList({ films }: Props) {
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1rem" }}>
+    <div className="film-grid">
       {films.map((film) => (
-        <div
-          key={film.id}
-          style={{
-            border: "1px solid #ccc",
-            borderRadius: "8px",
-            padding: "1rem",
-          }}
-        >
-          <img
-            src={film.image}
-            alt={film.title}
-            style={{ width: "100%", borderRadius: "8px", marginBottom: "0.5rem" }}
-          />
+        <div key={film.id} className="film-card">
+          <img src={film.image} alt={film.title} className="film-image" />
           <h2>{film.title}</h2>
           <p>{film.description}</p>
           <p><b>Director:</b> {film.director}</p>

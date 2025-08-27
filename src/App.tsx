@@ -1,6 +1,7 @@
 import { useState } from "react";
 import FilmList from "./components/FilmList";
 import useFilmsApi from "./data/useFilmsApi";
+import "./App.css";
 
 function App() {
   const films = useFilmsApi();
@@ -27,9 +28,9 @@ function App() {
         type="text"
         placeholder="Search by title..."
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+       onChange={(e) => setSearchTerm(e.target.value)}
+        className="search-input"
       />
-
       <FilmList films={filteredFilms} />
     </div>
   );
