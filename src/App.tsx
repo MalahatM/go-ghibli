@@ -1,4 +1,5 @@
-import useFilmsApi from "./data/useFilmsApi.ts";
+import FilmList from "./components/FilmList";
+import useFilmsApi from "./data/useFilmsApi";
 
 function App() {
   const films = useFilmsApi();
@@ -6,18 +7,9 @@ function App() {
   if (!films) return <p>Loading...</p>;
 
   return (
-    <div>
+    <div style={{ padding: "2rem" }}>
       <h1>Go Ghibli</h1>
-      <ul>
-        {films.map((film) => (
-          <li key={film.id}>
-            <h2>{film.title}</h2>
-            <p>🎬 Director: {film.director}</p>
-            <img src={film.image} alt={film.title} width="200" />
-            <p>{film.description}</p>
-          </li>
-        ))}
-      </ul>
+      <FilmList films={films} />
     </div>
   );
 }
