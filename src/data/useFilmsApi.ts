@@ -1,39 +1,32 @@
-import { useEffect, useState } from "react"
-
-interface Ghibli{
-
-"id": string,
-"title": string,
-"original_title":string,
-"original_title_romanised": string,
-"image":string,
-"description": string,
-"director": string,
+import { filmSchema } from "../types/film";
+import type { Film } from "../types/film";    
+import { z } from "zod";
+import { useEffect, useState } from "react";
 
 
-}
-function useFilmsApi(){
-    const[data,setData]=useState<Ghibli[] | null >(null)
+function useFilmsApi() {
+  const [data, setData] = useState<Film[] | null>(null);
 
-useEffect(()=>{
-    async function getData(){
-        try{
-            const res= await fetch("https://ghibliapi.vercel.app/films")
-              if (!res.ok) throw new Error("Failed to fetch data");
-           const jsonData: Ghibli[] = await res.json();
-        setData(jsonData);
+  useEffect(() => {
+    async function getData() {
+      try {
+        const res = await fetch("https://ghibliapi.vercel.app/films");
+        if (!res.ok) throw new Error("Failed to fetch data");
 
-        }catch(error){
-            console.log("has error",error)
-        }
+        const jsonData = await res.json();
 
+        // validate the data using zod and parsing it
+        const films = z.array(filmSchema).parse(jsonData);
+
+        setData(films);
+      } catch (error) {
+        console.log("has error", error);
+      }
     }
-    getData()
+    getData();
+  }, []);
 
-},[])
-
-return(data)
-
+  return data;
 }
 
-export default useFilmsApi
+export default useFilmsApi;

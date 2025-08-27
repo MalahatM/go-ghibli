@@ -1,7 +1,5 @@
 import useFilmsApi from "./data/useFilmsApi.ts";
 
-
-
 function App() {
   const films = useFilmsApi();
 
