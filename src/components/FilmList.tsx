@@ -16,20 +16,14 @@ function FilmList({ films }: Props) {
             padding: "1rem",
           }}
         >
-        
           <img
             src={film.image}
             alt={film.title}
             style={{ width: "100%", borderRadius: "8px", marginBottom: "0.5rem" }}
           />
-
-       
           <h2>{film.title}</h2>
-
-         <p>{film.description}</p>
- <p>
-            <b>Director:</b> {film.director}
-          </p>
+          <p>{film.description}</p>
+          <p><b>Director:</b> {film.director}</p>
         </div>
       ))}
     </div>

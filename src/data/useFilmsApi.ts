@@ -9,13 +9,11 @@ function useFilmsApi() {
   useEffect(() => {
     async function getData() {
       try {
-        // using proxy
-        const res = await fetch("/api/films");  
+        // Using proxy to fix CORS
+        const res = await fetch("/api/films");
         if (!res.ok) throw new Error("Failed to fetch data");
 
         const jsonData = await res.json();
-
-        // validate data with zod
         const films = z.array(filmSchema).parse(jsonData);
 
         setData(films);
