@@ -1,4 +1,6 @@
 import type { Film } from "../types/film";
+import "./FilmList.css";
+
 
 type FavoriteFilm = Film & { seen: boolean };
 
@@ -17,21 +19,27 @@ function FilmList({ films, favorites, toggleFavorite, toggleSeen }: Props) {
         return (
           <div key={film.id} className="film-card">
             <img src={film.image} alt={film.title} className="film-image" />
+
+            {/* Buttons under the image */}
+            <div className="buttons-container">
+              <button onClick={() => toggleFavorite(film)}>
+                {isFavorite ? "💖" : "🤍"}
+              </button>
+
+              {isFavorite && (
+                <button
+                  className="seen-btn"
+                  onClick={() => toggleSeen(film.id)}
+                >
+                  {isFavorite.seen ? "✅ Seen" : "❌ Not Seen"}
+                </button>
+              )}
+            </div>
+
+            {/* Title and details */}
             <h2>{film.title}</h2>
             <p>{film.description}</p>
             <p><b>Director:</b> {film.director}</p>
-
-            {/* Button favorite */}
-            <button onClick={() => toggleFavorite(film)}>
-              {isFavorite ? "💖" : "🤍"}
-            </button>
-
-            {/* Button toggle Seen / Not Seen */}
-            {isFavorite && (
-              <button onClick={() => toggleSeen(film.id)}>
-                {isFavorite.seen ? "✅ Seen" : "❌ Not Seen"}
-              </button>
-            )}
           </div>
         );
       })}

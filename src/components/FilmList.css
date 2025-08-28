@@ -1,30 +1,106 @@
+body {
+  background-color: #121212;
+  color: #f0f0f0;
+}
+/* Grid container */
 .film-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem; 
+  padding: 2rem; 
 }
 
+
+/* Film card */
 .film-card {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  background-color: #ffffff;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
+/* Hover effect */
+.film-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+}
+
+/* Film image */
 .film-image {
   width: 100%;
   border-radius: 8px;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  object-fit: cover;
+  max-height: 320px;
 }
-.seen-btn {
-  margin-top: 0.5rem;
-  padding: 0.3rem 0.6rem;
+
+/* Container for buttons under image */
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-bottom: 1rem; 
+}
+
+/* Favorite button */
+.film-card button {
+  padding: 0.5rem 0.9rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
-  background-color: #eee;
-  transition: background-color 0.2s;
+  font-size: 0.9rem;
+  background-color: #f4f4f4;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.film-card button:hover {
+  background-color: #ddd;
+  transform: scale(1.05);
+}
+
+/* Seen / Not Seen button */
+.seen-btn {
+  background-color: #f0c040;
+  color: #333;
+  font-weight: bold;
 }
 
 .seen-btn:hover {
-  background-color: #ddd;
+  background-color: #e0b030;
+}
+
+/* Title */
+.film-card h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  color: #222;
+}
+
+/* Description */
+.film-card p {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .film-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+
+  .film-card {
+    padding: 1rem;
+  }
 }
