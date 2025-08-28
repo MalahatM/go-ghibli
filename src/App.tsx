@@ -4,10 +4,14 @@ import useFilmsApi from "./data/useFilmsApi";
 import type { Film } from "./types/film";
 import "./App.css";
 
+
+//Define a new type that extends film with a seen property
+type FavoriteFilm = Film & { seen: boolean }; 
+
 function App() {
   const films = useFilmsApi();
   const [searchTerm, setSearchTerm] = useState(""); // state for search
-   const [favorites, setFavorites] = useState<Film[]>([]);//state for favorites
+   const [favorites, setFavorites] = useState<FavoriteFilm[]>([]);//state for favorites
 
   if (!films) return <p>Loading...</p>;
 
@@ -20,13 +24,18 @@ function App() {
   const filteredFilms = sortedFilms.filter(film =>
     film.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
-   const toggleFavorite = (film: Film) => {
-    if (favorites.find(f => f.id === film.id)) {
-      setFavorites(favorites.filter(f => f.id !== film.id));
-    } else {
-      setFavorites([...favorites, film]);
-    }
-  };
+ const toggleFavorite = (film: Film) => {
+  const existing = favorites.find(f => f.id === film.id);
+
+  if (existing) {
+    // delet favorite
+    setFavorites(favorites.filter(f => f.id !== film.id));
+  } else {
+    // اadding fvorite with seen=false
+    setFavorites([...favorites, { ...film, seen: false }]);
+  }
+};
+
 
   return (
     <div style={{ padding: "2rem" }}>
