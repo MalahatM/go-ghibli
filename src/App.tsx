@@ -35,6 +35,12 @@ function App() {
     setFavorites([...favorites, { ...film, seen: false }]);
   }
 };
+const toggleSeen = (id: string) => {
+  setFavorites(favorites.map(f => 
+    f.id === id ? { ...f, seen: !f.seen } : f
+  ));
+};
+
 
 
   return (
@@ -53,6 +59,7 @@ function App() {
   films={filteredFilms} 
   favorites={favorites} 
   toggleFavorite={toggleFavorite} 
+   toggleSeen={toggleSeen} 
 />
 
     </div>
